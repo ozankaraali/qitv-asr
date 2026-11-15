@@ -1,0 +1,21 @@
+# The versions the released models were trained, exported and scored with (Python 3.12, Linux, CUDA 12.8).
+# PyTorch from its CUDA 12.8 index: pip install --index-url https://download.pytorch.org/whl/cu128 torch==2.11.0 torchaudio==2.11.0
+torch==2.11.0
+torchaudio==2.11.0
+transformers==5.22.1
+nemo-toolkit[asr]==3.0.0
+lightning==2.4.0
+# NeMo's RNNT loss runs on Numba; this CUDA target knows Blackwell (RTX 50xx, compute 12.0)
+numba-cuda[cu12]==0.30.4
+# numba-cuda 0.30.4 still uses numpy.row_stack, gone from NumPy 2.3 on
+numpy==2.2.6
+sentencepiece==0.2.2
+tokenizers==0.23.3
+safetensors==0.8.0
+sherpa-onnx==2.0.1
+onnx==1.23.2
+onnxruntime==1.31.1
+soundfile==0.14.0
+scipy==1.18.1
+num2words==0.5.14
+rapidfuzz==3.14.6

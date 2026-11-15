@@ -1,0 +1,2 @@
+{"id": "talk01", "audio": "/data/sound/talk01.wav", "subtitles": "/data/subs/talk01.tr.vtt", "group": "show A", "title": "An invented talk", "url": "https://example.org/talk01", "license": "CC BY 4.0"}
+{"id": "vlog07", "audio": "/data/sound/vlog07.wav", "subtitles": "/data/subs/vlog07.tr.srt", "group": "creator B"}

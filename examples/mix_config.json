@@ -1,0 +1,44 @@
+{
+  "_comment": "An invented example. Paths are read relative to this file (or absolute); groups and shares as for the released models.",
+  "groups": [
+    {"name": "drama", "share": 0.30, "takes_rest": true},
+    {"name": "parliament", "share": 0.13},
+    {"name": "read", "share": 0.18},
+    {"name": "broad", "share": 0.25, "max_passes": 3},
+    {"name": "films_songs", "share": 0.08},
+    {"name": "english", "share": 0.09},
+    {"name": "no_speech", "share": 0.01}
+  ],
+  "interjections": {"name": "drama_interj", "share_of_group": 0.0612},
+  "heldout": ["../eval_lists/*.jsonl"],
+  "exclude_episodes": [],
+  "sources": [
+    {"name": "drama_a", "group": "drama", "path": "../sources/drama_a.jsonl", "text": "subtitles", "dedup": "seed",
+     "held_out": {"series": "../heldout/drama_series.txt", "episode": "../heldout/drama_episodes.txt"}},
+    {"name": "drama_b_lines", "group": "drama", "path": "../sources/drama_b_lines.jsonl", "text": "subtitles",
+     "joined_lines": true, "dedup": "check", "drop_digits": true,
+     "held_out": {"series": "../heldout/drama_series.txt"}},
+    {"name": "drama_c_lines", "group": "drama", "path": "../sources/tv_lines.jsonl", "text": "subtitles",
+     "dedup": "check", "drop_digits": true, "held_out": {"series": "../heldout/drama_series.txt"}},
+    {"name": "parliament", "group": "parliament", "path": "../sources/parliament.jsonl", "text": "subtitles",
+     "held_out": {"session": "../heldout/parliament_sessions.txt"}},
+    {"name": "cv", "group": "read", "path": "../sources/cv_train.jsonl", "text": "read"},
+    {"name": "fleurs", "group": "read", "path": "../sources/fleurs_train.jsonl", "text": "read"},
+    {"name": "books", "group": "read", "path": "../sources/books.jsonl", "text": "clean", "max_passes": 6},
+    {"name": "talk", "group": "broad", "path": "../sources/talk.jsonl", "text": "clean", "drop_digits": true},
+    {"name": "video_spans", "group": "broad", "path": "../sources/video_spans.jsonl", "text": "clean",
+     "drop_digits": true, "dedup": "check", "held_out_by_text": true},
+    {"name": "synthetic", "group": "broad", "path": "../sources/tts.jsonl", "text": "clean", "drop_digits": true,
+     "max_passes": 1.5, "share_max": 0.05},
+    {"name": "films", "group": "films_songs", "path": "../sources/films.jsonl", "text": "clean", "sentences": true,
+     "drop_digits": true},
+    {"name": "songs_tr", "group": "films_songs", "path": "../sources/songs_tr.jsonl", "text": "sung", "drop_digits": true},
+    {"name": "english", "group": "english", "path": "../sources/english.jsonl", "text": "english", "max_passes": 5},
+    {"name": "nonspeech", "group": "no_speech", "path": "../sources/nonspeech.jsonl", "text": "none"},
+    {"name": "songs", "group": "no_speech", "path": "../sources/songs_no_text.jsonl", "text": "none"}
+  ],
+  "checks": [
+    {"name": "drama_dev", "path": "../eval_lists/drama_dev.jsonl"}
+  ],
+  "fc_drop": ["english", "nonspeech"]
+}
