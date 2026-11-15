@@ -9,19 +9,6 @@ The scripts behind three Turkish speech recognizers built for live captions in [
 
 The models, their results and their licence are on the model pages. This repository is the method behind them.
 
-## Why we made it
-
-We care about accessibility. Subtitles let deaf and hard-of-hearing people follow Turkish TV, films and talk, and
-they help everyone learning Turkish. Good Turkish captions shouldn't depend on a paid service or an internet
-connection.
-
-- **Free to use and deploy.** The models are CC BY 4.0 (personal or commercial, no fees, just credit) and run
-  offline on an ordinary CPU, on the viewer's own device.
-- **Free to develop further.** This code is MIT: the whole method, from clip lists to scores. Train on your own
-  data, build your own tests, make it smaller or better.
-- **Better open models, together.** We test against every open Turkish model we could find and publish where
-  others do better. If you build a better one, on ours or from scratch, tell us: we'd be proud to have helped.
-
 ## What is here
 
 Everything from clip lists to scores:
