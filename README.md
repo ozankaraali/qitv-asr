@@ -323,13 +323,13 @@ The released Moonshine weights are the **last** state of the cool-down (`<out>/l
 | Both | `--bucket 4 --carry 1 --no-repeat 1 --max-s 25 --aug2 1 --specaug 0.5 --dec-dropout 0.1` | |
 
 
-**Fine-tuning a released Moonshine model.** Start from its `weights/` folder with `--init` (its Turkish and English
+**Fine-tuning a released Moonshine model.** Start from a download of its model repository with `--init` (its Turkish and English
 pieces are already in, so nothing is swapped) and give its `tr.model` as `--sp`, for example a short decaying run on
 your own mix:
 
 ```bash
-python train/moon_train.py $Q/exp/my_medium --init qitv-asr-tr-moonshine-mid/weights \
-    --base moonshine-streaming-medium --sp qitv-asr-tr-moonshine-mid/weights/tr.model \
+python train/moon_train.py $Q/exp/my_medium --init qitv-asr-tr-moonshine-mid \
+    --base moonshine-streaming-medium --sp qitv-asr-tr-moonshine-mid/tr.model \
     --mix $Q/mix/mix.json --val ... (as above) --batch-s 240 --checkpointing 1 \
     --schedule decay --lr 3e-5 --final-lr 1e-6 --hours 3 --eval-every 2000 --snapshots 3 --best-by drama
 ```
@@ -448,16 +448,24 @@ kept with the code; the lines above follow its file name (order 4, pruning 0 2 4
 
 ## Credits
 
-- **Models and runtimes:** Moonshine Streaming by Useful Sensors (Moonshine AI), MIT; NVIDIA's streaming
-  FastConformer and NeMo (the model CC BY 4.0, NeMo Apache 2.0); sherpa-onnx by the k2-fsa team.
-- **Tools:** WorkmindAI/stt-models (MIT) for the Moonshine ONNX export; KenLM for the n-gram; Silero VAD; MMS's
-  forced aligner (Meta's MMS, through torchaudio's MMS_FA pipeline) for the clip check.
+- **Models and runtimes:** [Moonshine Streaming](https://huggingface.co/moonshine-ai/moonshine-streaming-medium) by
+  Useful Sensors (Moonshine AI), MIT; NVIDIA's
+  [streaming FastConformer](https://huggingface.co/nvidia/stt_en_fastconformer_hybrid_large_streaming_multi)
+  (CC BY 4.0) and [NeMo](https://github.com/NVIDIA/NeMo) (Apache 2.0);
+  [sherpa-onnx](https://github.com/k2-fsa/sherpa-onnx) by the k2-fsa team (Apache 2.0).
+- **Tools:** [WorkmindAI/stt-models](https://github.com/WorkmindAI/stt-models) (MIT) for the Moonshine ONNX export;
+  [KenLM](https://github.com/kpu/kenlm) for the n-gram; [Silero VAD](https://github.com/snakers4/silero-vad);
+  [MMS](https://github.com/facebookresearch/fairseq/tree/main/examples/mms)'s forced aligner, through
+  [torchaudio's MMS_FA pipeline](https://docs.pytorch.org/audio/stable/pipelines.html), for the clip check.
 - **Text normalization:** [Damga](https://pypi.org/project/damga/) by mihu.ai (Apache 2.0): its text normalizer
   wrote the numbers as spoken words in part of the training text, in earlier stages of training. The number code in
-  this repository (`common/tr_numbers.py`, `common/tr_numbers_written.py`) is our own.
-- **Data:** MUSAN and room impulse responses (OpenSLR) for augmentation; YODAS and YODAS v3 (ESPnet) for speech from
-  online videos.
-- **Test sets:** the FLEURS, Common Voice, MediaSpeech and VoxPopuli teams, for public test sets.
+  this repository (`common/tr_numbers.py`, `common/tr_numbers_written.py`) is our own, not a fork of it.
+- **Data:** [MUSAN](https://www.openslr.org/17/) and [room impulse responses](https://www.openslr.org/28/) (OpenSLR)
+  for augmentation; [YODAS](https://huggingface.co/datasets/espnet/yodas) and
+  [YODAS v3](https://huggingface.co/datasets/espnet/yodas3) (ESPnet) for speech from online videos.
+- **Test sets:** the [FLEURS](https://huggingface.co/datasets/google/fleurs),
+  [Common Voice](https://commonvoice.mozilla.org), [MediaSpeech](https://github.com/NTRLab/MediaSpeech) and
+  [VoxPopuli](https://github.com/facebookresearch/voxpopuli) teams, for public test sets.
 
 ## Licence
 
