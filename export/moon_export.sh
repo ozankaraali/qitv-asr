@@ -8,7 +8,8 @@
 #
 # The weights are quantised per channel (one scale for each output row): stt-models' quantize_onnx.py with
 # per_channel=True instead of its per-tensor default. Per tensor cost the medium 0.6-0.8 points of words wrong on
-# read speech, at the same size and speed.
+# read speech, at the same size and speed. Then moon_u8.py stores the int8 weights unsigned (the same products): x86
+# processors without VNNI otherwise saturate on full-range per-channel weights and the decoder loops.
 #
 # usage: STT_MODELS=<a clone of github.com/WorkmindAI/stt-models> bash moon_export.sh <checkpoint dir> <out dir>
 #   (the first run makes a venv inside the clone, as its README does)
@@ -39,6 +40,10 @@ sed "s/per_channel=False,/per_channel=True,/" scripts/quantize_onnx.py > "$Q"
 grep -q "per_channel=True," "$Q" || { echo "scripts/quantize_onnx.py has no per_channel=False to switch" >&2; exit 1; }
 nice -n 10 .venv/bin/python3 "$Q" "$OUT/encoder_model.onnx" "$OUT/onnx" q8
 nice -n 10 .venv/bin/python3 "$Q" "$OUT/decoder_model_merged.onnx" "$OUT/onnx" q8
+log "int8 weights as uint8 (processors without VNNI)"
+for f in encoder_model_quantized decoder_model_merged_quantized; do
+    nice -n 10 .venv/bin/python3 "$here/moon_u8.py" "$OUT/onnx/$f.onnx" "$OUT/onnx/$f.onnx"
+done
 log "tokens"
 .venv/bin/python3 "$here/moon_tokens.py" "$CK/tr.model" "$OUT/onnx/tokens.txt"
 ls -la "$OUT/onnx"

@@ -52,6 +52,7 @@ train/    sp_turkish.py   the Turkish SentencePiece for Moonshine (8,192 pieces)
           fc_train.py     the FastConformer trainer (NeMo + Lightning)
 export/   moon_export.sh  Moonshine -> sherpa-onnx int8 files (with WorkmindAI/stt-models)
           moon_tokens.py  the base64 tokens.txt sherpa-onnx's Moonshine loader reads
+          moon_u8.py      int8 weights stored unsigned, so processors without VNNI read the decoder exactly
           hf_tokenizer.py tokenizer.json for the 🤗 Transformers weights folder, checked against SentencePiece
           fc_export.py/sh FastConformer .nemo -> the released sherpa-onnx streaming transducer files (int8)
 eval/     read.py         one model reads every clip of a test manifest, as it is deployed
