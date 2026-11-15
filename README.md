@@ -33,6 +33,7 @@ live streams you may use).
 
 ```
 common/   tr_numbers.py   Turkish numbers as words (training text and the scorer)
+          tr_numbers_written.py  the models' number words as digits, as QiTV shows them (for display)
           tr_text.py      training-text cleaning and the letters-per-second checks
           en_numbers.py   English numbers as words, or the line dropped when the reading is unclear
           scoring.py      the scorers (standard, strict, English), WER/CER, bootstrap, punctuation counts
@@ -355,6 +356,17 @@ python train/fc_train.py my-conformer 6000 --init qitv-asr-tr-conformer.nemo --m
 ```
 
 The released sherpa-onnx files were exported from the released .nemo with the command below.
+
+### Showing numbers as digits
+
+The models write every number in words, as they were trained ("saat on beş otuzda"). QiTV shows them as Turkish
+subtitles write them; `common/tr_numbers_written.py` does the same, with the standard library only:
+
+```python
+from common.tr_numbers_written import written
+print(written("saat on beş otuzda yüzde beş arttı ve iki bin yedide on dört kişi geldi"))
+# saat 15.30'da %5 arttı ve 2007'de 14 kişi geldi
+```
 
 ### 8. Export
 
