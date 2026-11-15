@@ -452,6 +452,9 @@ kept with the code; the lines above follow its file name (order 4, pruning 0 2 4
   FastConformer and NeMo (the model CC BY 4.0, NeMo Apache 2.0); sherpa-onnx by the k2-fsa team.
 - **Tools:** WorkmindAI/stt-models (MIT) for the Moonshine ONNX export; KenLM for the n-gram; Silero VAD; MMS's
   forced aligner (Meta's MMS, through torchaudio's MMS_FA pipeline) for the clip check.
+- **Text normalization:** [Damga](https://pypi.org/project/damga/) by mihu.ai (Apache 2.0): its text normalizer
+  wrote the numbers as spoken words in part of the training text, in earlier stages of training. The number code in
+  this repository (`common/tr_numbers.py`, `common/tr_numbers_written.py`) is our own.
 - **Data:** MUSAN and room impulse responses (OpenSLR) for augmentation; YODAS and YODAS v3 (ESPnet) for speech from
   online videos.
 - **Test sets:** the FLEURS, Common Voice, MediaSpeech and VoxPopuli teams, for public test sets.
